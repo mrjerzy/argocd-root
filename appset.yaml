@@ -8,9 +8,11 @@ spec:
       elements:
       - name: nginx
         stage: test
+        repoUrl: https://github.com/mrjerzy/app-nginx.git
         targetRevision: HEAD
       - name: nginx
         stage: prod
+        repoUrl: https://github.com/mrjerzy/app-nginx.git
         targetRevision: v0.0.1
   template:
     metadata:
@@ -18,7 +20,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/mrjerzy/argocd-root.git
+        repoURL: '{{repoUrl}}'
         targetRevision: '{{targetRevision}}'
         path: deployment/{{name}}/{{stage}}
       destination:
