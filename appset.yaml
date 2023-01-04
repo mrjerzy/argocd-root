@@ -11,7 +11,7 @@ spec:
         targetRevision: HEAD
       - name: nginx
         stage: prod
-        targetRevision: HEAD
+        targetRevision: v0.0.1
   template:
     metadata:
       name: '{{name}}-{{stage}}'
