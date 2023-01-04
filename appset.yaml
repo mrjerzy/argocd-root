@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-root
+spec:
+  generators:
+  - list:
+      elements:
+      - name: nginx
+        stage: test
+        targetRevision: HEAD
+  template:
+    metadata:
+      name: '{{stage}}-{{name}}'
+    spec:
+      project: my-project
+      source:
+        repoURL: https://github.com/mrjerzy/argocd-root.git
+        targetRevision: HEAD
+        path: deployment/{{name}}/{{stage}}
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{stage}}-{{name}}'
