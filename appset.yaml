@@ -13,7 +13,12 @@ spec:
       - name: nginx
         stage: prod
         repoUrl: https://github.com/mrjerzy/app-nginx.git
-        targetRevision: v0.0.1
+        targetRevision: v0.0.2
+      - name: prometheus-operator
+        stage: prod
+        repoUrl: https://github.com/mrjerzy/app-prometheus-operator.git
+        targetRevision: HEAD
+
   template:
     metadata:
       name: '{{name}}-{{stage}}'
@@ -22,7 +27,7 @@ spec:
       source:
         repoURL: '{{repoUrl}}'
         targetRevision: '{{targetRevision}}'
-        path: deployment/{{name}}/{{stage}}
+        path: deployment/{{stage}}
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{name}}-{{stage}}'
