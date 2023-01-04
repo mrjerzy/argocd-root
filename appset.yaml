@@ -13,11 +13,16 @@ spec:
     metadata:
       name: '{{stage}}-{{name}}'
     spec:
-      project: my-project
+      project: default
       source:
         repoURL: https://github.com/mrjerzy/argocd-root.git
         targetRevision: HEAD
-        path: deployment/{{name}}/{{stage}}
+        path: deployment/{{name}}/stages/{{stage}}
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{stage}}-{{name}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
