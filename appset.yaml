@@ -9,6 +9,9 @@ spec:
       - name: nginx
         stage: test
         targetRevision: HEAD
+      - name: nginx
+        stage: prod
+        targetRevision: HEAD
   template:
     metadata:
       name: '{{stage}}-{{name}}'
